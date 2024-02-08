@@ -1,0 +1,17 @@
+//1. Implement a function that checks whether a given string is a palindrome or not.
+fn is_palindrome(input: &str)-> bool {
+    // Convert the input string to lowercase and filter out non-alphanumeric characters
+    let cleaned_input: String = input.chars().filter(|c| c.is_alphanumeric()).collect();    
+    // Check if the cleaned string is the same when reversed
+    cleaned_input.eq_ignore_ascii_case(&cleaned_input.chars().rev().collect::<String>())
+}
+
+fn main() {
+    let example_str = "A man a plan a canal Panama";
+    
+    if is_palindrome(example_str) {
+        println!("The string is a palindrome.");
+    } else {
+        println!("The string is not a palindrome.");
+    }
+}
