@@ -1,0 +1,28 @@
+//Given a binary tree, implement a function that returns the maximum depth of the tree.
+// Definition for a binary tree node
+#[derive(Debug, Clone)]
+struct TreeNode {
+    value: i32,
+    left: Option<Box<TreeNode>>,
+    right: Option<Box<TreeNode>>,
+}
+impl TreeNode {
+    fn new(value: i32) -> Self {
+        TreeNode {
+            value,
+            left: None,
+            right: None,
+        }
+    }
+}
+
+fn max_depth(root: Option<Box<TreeNode>>) -> usize {
+    match root {
+        Some(node) => {
+            let left_depth = max_depth(node.left);
+            let right_depth = max_depth(node.right);
+            1 + left_depth.max(right_depth)
+        }
+        None => 0,
+    }
+}
