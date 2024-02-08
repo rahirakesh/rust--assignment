@@ -1,0 +1,16 @@
+//3. Given a string of words, implement a function that returns the shortest word in the string.
+fn shortest_word(input: &str) -> Option<&str> {
+    input
+        .split_whitespace()
+        .min_by_key(|word| word.len())
+}
+fn main() {
+    // Example usage
+    let input_str = "Rust the programming language";    
+    if let Some(shortest) = shortest_word(input_str) {
+        println!("The shortest word is: {}", shortest);
+    } else {
+        println!("No words found in the input string.");
+    }
+}
+ 
