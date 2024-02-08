@@ -1,0 +1,24 @@
+//4. Implement a function that checks whether a given number is prime or not.
+fn is_prime(num: u32) -> bool {
+    if num < 2 {
+        return false; // Numbers less than 2 are not prime
+    }
+    // Check for divisibility from 2 to the square root of the number
+    for i in 2..=((num as f64).sqrt() as u32) {
+        if num % i == 0 {
+            return false; // If any divisor is found, the number is not prime
+        }
+    }
+    true // If no divisors are found, the number is prime
+}
+
+fn main() {
+    // Example usage
+    let number = 17;
+    if is_prime(number) {
+        println!("{} is a prime number.", number);
+    } else {
+        println!("{} is not a prime number.", number);
+    }
+}
+ 
