@@ -1,0 +1,35 @@
+//Implement a function that returns the kth smallest element in a given array.
+fn quickselect(arr: &mut [i32], k: usize) -> Option<i32> {
+    if k > 0 && k <= arr.len() {
+        let index = partition(arr);
+        if index == k - 1 {
+            return Some(arr[index]);
+        } else if index > k - 1 {
+            return quickselect(&mut arr[0..index], k);
+        } else {
+            return quickselect(&mut arr[index + 1..], k - index - 1);
+        }
+    }
+    None
+}
+fn partition(arr: &mut [i32]) -> usize {
+    let pivot_index = arr.len() / 2;
+    arr.swap(pivot_index, arr.len() - 1);
+    let mut i = 0;
+    for j in 0..arr.len() - 1 {
+        if arr[j] <= arr[arr.len() - 1] {
+            arr.swap(i, j);
+            i += 1;
+        }
+    }
+    arr.swap(i, arr.len() - 1);
+    i
+}
+fn main() {
+    let mut array = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+    if let Some(kth_smallest) = quickselect(&mut array, 5) {
+        println!("The 5th smallest element is: {}", kth_smallest);
+    } else {
+        println!("Invalid input or array size is less than k.");
+    }
+}
